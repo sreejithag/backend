@@ -5,10 +5,4 @@ exports.register = async (server) => {
     path: "/getDataByCountry/{country}",
     handler: getDataController.getDataByCountry,
   });
-
-  //   server.route({
-  //     method: "GET",
-  //     path: "/getDataByName/{name}/{company}",
-  //     handler: getDataController.getDataByNameAndCompany,
-  //   });
 };

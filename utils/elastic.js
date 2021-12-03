@@ -23,7 +23,7 @@ exports.getAllData = async (index, from, limit) => {
   const returnData = {
     results: hits.hits.map((hit) => hit._source),
     max: max,
-    page: (from - 1) / limit + 1,
+    page: from / limit + 1,
   };
 
   return returnData;
@@ -52,7 +52,7 @@ exports.getDataByName = async (index, name, from, limit) => {
   const returnData = {
     results: hits.hits.map((hit) => hit._source),
     max: max,
-    page: (from - 1) / limit + 1,
+    page: from / limit + 1,
   };
 
   return returnData;
@@ -81,7 +81,7 @@ exports.getDataByCompany = async (index, company, from, limit) => {
   const returnData = {
     results: hits.hits.map((hit) => hit._source),
     max: max,
-    page: (from - 1) / limit + 1,
+    page: from / limit + 1,
   };
 
   return returnData;
@@ -109,13 +109,13 @@ exports.getDataByCountry = async (index, country, from, limit) => {
   const returnData = {
     results: hits.hits.map((hit) => hit._source),
     max: max,
-    page: (from - 1) / limit + 1,
+    page: from / limit + 1,
   };
 
   return returnData;
 };
 
-exports.getDataByNameAndCompany = async (index, name, company, from, limit) => {
+exports.getDataByNameAndCountry = async (index, name, country, from, limit) => {
   const body = {
     query: {
       bool: {
@@ -127,7 +127,7 @@ exports.getDataByNameAndCompany = async (index, name, company, from, limit) => {
           },
           {
             match: {
-              worksAt: company,
+              address: country,
             },
           },
         ],
@@ -139,7 +139,7 @@ exports.getDataByNameAndCompany = async (index, name, company, from, limit) => {
     index: index,
     from: from,
     size: limit,
-    track_total_hits: true,
+    //track_total_hits: true,
     body: body,
   });
 
@@ -149,7 +149,7 @@ exports.getDataByNameAndCompany = async (index, name, company, from, limit) => {
   const returnData = {
     results: hits.hits.map((hit) => hit._source),
     max: max,
-    page: (from - 1) / limit + 1,
+    page: from / limit + 1,
   };
 
   return returnData;

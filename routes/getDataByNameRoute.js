@@ -8,7 +8,7 @@ exports.register = async (server) => {
 
   server.route({
     method: "GET",
-    path: "/getDataByName/{name}/{company}",
-    handler: getDataController.getDataByNameAndCompany,
+    path: "/getDataByName/{name}/{country}",
+    handler: getDataController.getDataByNameAndCountry,
   });
 };
