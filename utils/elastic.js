@@ -11,11 +11,160 @@ const client = new Client({
 });
 
 exports.getAllData = async (index, from, limit) => {
-  const result = await client.search({
+  const response = await client.search({
     index: index,
     from: from,
     size: limit,
+    track_total_hits: true,
+  });
+  const { hits } = response.body;
+
+  const max = hits.total.value;
+  const returnData = {
+    results: hits.hits.map((hit) => hit._source),
+    max: max,
+    page: (from - 1) / limit + 1,
+  };
+
+  return returnData;
+};
+
+exports.getDataByName = async (index, name, from, limit) => {
+  const body = {
+    query: {
+      match: {
+        name: name,
+      },
+    },
+  };
+
+  const response = await client.search({
+    index: index,
+    from: from,
+    size: limit,
+    track_total_hits: true,
+    body: body,
   });
 
-  return result.body.hits.hits.map((hit) => hit._source);
+  const { hits } = response.body;
+
+  const max = hits.total.value;
+  const returnData = {
+    results: hits.hits.map((hit) => hit._source),
+    max: max,
+    page: (from - 1) / limit + 1,
+  };
+
+  return returnData;
+};
+
+exports.getDataByCompany = async (index, company, from, limit) => {
+  const body = {
+    query: {
+      match: {
+        worksAt: company,
+      },
+    },
+  };
+
+  const response = await client.search({
+    index: index,
+    from: from,
+    size: limit,
+    track_total_hits: true,
+    body: body,
+  });
+
+  const { hits } = response.body;
+
+  const max = hits.total.value;
+  const returnData = {
+    results: hits.hits.map((hit) => hit._source),
+    max: max,
+    page: (from - 1) / limit + 1,
+  };
+
+  return returnData;
+};
+
+exports.getDataByCountry = async (index, country, from, limit) => {
+  const body = {
+    query: {
+      match: {
+        address: country,
+      },
+    },
+  };
+  const response = await client.search({
+    index: index,
+    from: from,
+    size: limit,
+    track_total_hits: true,
+    body: body,
+  });
+
+  const { hits } = response.body;
+
+  const max = hits.total.value;
+  const returnData = {
+    results: hits.hits.map((hit) => hit._source),
+    max: max,
+    page: (from - 1) / limit + 1,
+  };
+
+  return returnData;
+};
+
+exports.getDataByNameAndCompany = async (index, name, company, from, limit) => {
+  const body = {
+    query: {
+      bool: {
+        must: [
+          {
+            match: {
+              name: name,
+            },
+          },
+          {
+            match: {
+              worksAt: company,
+            },
+          },
+        ],
+      },
+    },
+  };
+
+  const response = await client.search({
+    index: index,
+    from: from,
+    size: limit,
+    track_total_hits: true,
+    body: body,
+  });
+
+  const { hits } = response.body;
+
+  const max = hits.total.value;
+  const returnData = {
+    results: hits.hits.map((hit) => hit._source),
+    max: max,
+    page: (from - 1) / limit + 1,
+  };
+
+  return returnData;
+};
+
+exports.getAllCountry = async (index) => {
+  const body = {
+    size: 10000,
+    _source: ["name"],
+  };
+
+  const response = await client.search({
+    index: index,
+    body: body,
+  });
+  const { hits } = response.body;
+  return hits.hits.map((hit) => hit._source.name);
 };
