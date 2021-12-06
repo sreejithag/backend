@@ -14,15 +14,6 @@ const config = {
 const init = async () => {
   try {
     const server = await app.createServer(config);
-    // await server.register(require("@hapi/cookie"));
-
-    // server.auth.strategy("basic", "cookie", {
-    //   cookie: {
-    //     name: "dataTable-cookie",
-    //     password: "!wsYhFA*C2U6nz=Bu^%A@^F#SF3&kSR6",
-    //     ttl: 24 * 60 * 60 * 1000,
-    //   },
-    // });
 
     await server.start();
 

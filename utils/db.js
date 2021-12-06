@@ -1,5 +1,19 @@
 const { User } = require("../models/user");
 
+const getUserFromUsername = async (username) => {
+  try {
+    const user = await User.findOne({
+      where: {
+        username: username,
+      },
+    });
+
+    return user;
+  } catch (err) {
+    console.log(err);
+  }
+};
+
 exports.createUser = async (username, password) => {
   try {
     const user = await User.create({
@@ -14,20 +28,23 @@ exports.createUser = async (username, password) => {
   }
 };
 
+exports.isUserExists = async (username) => {
+  const user = await getUserFromUsername(username);
+  return !user ? false : true;
+};
+
 exports.checkUserAndValidatePassword = async (username, password) => {
-  try {
-    const user = await User.findOne({
-      where: {
-        username: username,
-      },
-    });
+  const user = await getUserFromUsername(username);
 
-    if (!user) {
-      return false;
-    }
-
-    return await user.validatePassword(password);
-  } catch (err) {
-    console.log(err);
+  if (!user) {
+    return {
+      success: false,
+      usernameDB: null,
+    };
   }
+
+  return {
+    success: await user.validatePassword(password),
+    usernameDB: user.username,
+  };
 };

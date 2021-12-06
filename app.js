@@ -1,4 +1,5 @@
 const Hapi = require("@hapi/hapi");
+const auth = require("./auth/auth");
 const getDataRoute = require("./routes/getDataRoute");
 const getDataByNameRoute = require("./routes/getDataByNameRoute");
 const getDataByCompanyRoute = require("./routes/getDataByCompany");
@@ -11,6 +12,8 @@ module.exports.createServer = async (config) => {
   const server = Hapi.server(config);
 
   //register the routes and plugins here
+  await auth.register(server);
+
   await getDataRoute.register(server);
   await getDataByNameRoute.register(server);
   await getDataByCompanyRoute.register(server);

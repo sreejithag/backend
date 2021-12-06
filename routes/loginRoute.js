@@ -5,5 +5,10 @@ exports.register = async (server) => {
     method: "POST",
     path: "/login",
     handler: authController.login,
+    options: {
+      auth: {
+        mode: "try",
+      },
+    },
   });
 };

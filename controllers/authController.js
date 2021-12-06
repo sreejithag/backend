@@ -2,8 +2,12 @@ const db = require("../utils/db");
 exports.login = async (request, h) => {
   const { username, password } = request.payload;
   console.log(username);
-  const success = await db.checkUserAndValidatePassword(username, password);
+  const { success, usernameDB } = await db.checkUserAndValidatePassword(
+    username,
+    password
+  );
   if (success) {
+    request.cookieAuth.set({ username: usernameDB });
     return {
       success: true,
     };
