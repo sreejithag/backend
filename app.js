@@ -4,6 +4,8 @@ const getDataByNameRoute = require("./routes/getDataByNameRoute");
 const getDataByCompanyRoute = require("./routes/getDataByCompany");
 const getCountryRoute = require("./routes/getCountryRoute");
 const getDataByCountryRoute = require("./routes/getDataByCountryRoute");
+const loginRoute = require("./routes/loginRoute");
+const signupRoute = require("./routes/signupRoute");
 
 module.exports.createServer = async (config) => {
   const server = Hapi.server(config);
@@ -14,5 +16,7 @@ module.exports.createServer = async (config) => {
   await getDataByCompanyRoute.register(server);
   await getCountryRoute.register(server);
   await getDataByCountryRoute.register(server);
+  await loginRoute.register(server);
+  await signupRoute.register(server);
   return server;
 };

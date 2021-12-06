@@ -10,6 +10,16 @@ const client = new Client({
   },
 });
 
+const getDataFromHits = (hits, from, limit) => {
+  const max = hits.total.value;
+  const returnData = {
+    results: hits.hits.map((hit) => hit._source),
+    max: max,
+    page: from / limit + 1,
+  };
+  return returnData;
+};
+
 exports.getAllData = async (index, from, limit) => {
   const response = await client.search({
     index: index,
@@ -19,13 +29,7 @@ exports.getAllData = async (index, from, limit) => {
   });
   const { hits } = response.body;
 
-  const max = hits.total.value;
-  const returnData = {
-    results: hits.hits.map((hit) => hit._source),
-    max: max,
-    page: from / limit + 1,
-  };
-
+  const returnData = getDataFromHits(hits, from, limit);
   return returnData;
 };
 
@@ -48,13 +52,7 @@ exports.getDataByName = async (index, name, from, limit) => {
 
   const { hits } = response.body;
 
-  const max = hits.total.value;
-  const returnData = {
-    results: hits.hits.map((hit) => hit._source),
-    max: max,
-    page: from / limit + 1,
-  };
-
+  const returnData = getDataFromHits(hits, from, limit);
   return returnData;
 };
 
@@ -77,13 +75,7 @@ exports.getDataByCompany = async (index, company, from, limit) => {
 
   const { hits } = response.body;
 
-  const max = hits.total.value;
-  const returnData = {
-    results: hits.hits.map((hit) => hit._source),
-    max: max,
-    page: from / limit + 1,
-  };
-
+  const returnData = getDataFromHits(hits, from, limit);
   return returnData;
 };
 
@@ -105,13 +97,7 @@ exports.getDataByCountry = async (index, country, from, limit) => {
 
   const { hits } = response.body;
 
-  const max = hits.total.value;
-  const returnData = {
-    results: hits.hits.map((hit) => hit._source),
-    max: max,
-    page: from / limit + 1,
-  };
-
+  const returnData = getDataFromHits(hits, from, limit);
   return returnData;
 };
 
@@ -145,13 +131,7 @@ exports.getDataByNameAndCountry = async (index, name, country, from, limit) => {
 
   const { hits } = response.body;
 
-  const max = hits.total.value;
-  const returnData = {
-    results: hits.hits.map((hit) => hit._source),
-    max: max,
-    page: from / limit + 1,
-  };
-
+  const returnData = getDataFromHits(hits, from, limit);
   return returnData;
 };
 
