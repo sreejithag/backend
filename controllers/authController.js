@@ -1,13 +1,13 @@
 const db = require("../utils/db");
 exports.login = async (request, h) => {
-  const { username, password } = request.payload;
-  console.log(username);
-  const { success, usernameDB } = await db.checkUserAndValidatePassword(
-    username,
+  const { email, password } = request.payload;
+
+  const { success, emailDB } = await db.checkUserAndValidatePassword(
+    email,
     password
   );
   if (success) {
-    request.cookieAuth.set({ username: usernameDB });
+    request.cookieAuth.set({ email: emailDB });
     return {
       success: true,
     };
@@ -19,9 +19,9 @@ exports.login = async (request, h) => {
 };
 
 exports.signup = async (request, h) => {
-  const { username, password } = request.payload;
+  const { email, password, firstName, lastName } = request.payload;
 
-  const success = await db.createUser(username, password);
+  const success = await db.createUser(email, password, firstName, lastName);
   if (success) {
     return {
       success: true,

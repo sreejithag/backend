@@ -1,10 +1,10 @@
 const { User } = require("../models/user");
 
-const getUserFromUsername = async (username) => {
+const getUserFromEmail = async (email) => {
   try {
     const user = await User.findOne({
       where: {
-        username: username,
+        email: email,
       },
     });
 
@@ -14,12 +14,13 @@ const getUserFromUsername = async (username) => {
   }
 };
 
-exports.createUser = async (username, password) => {
+exports.createUser = async (email, password, firstName, lastName) => {
   try {
     const user = await User.create({
-      username: username,
+      firstName: firstName,
+      lastName: lastName,
+      email: email,
       password: password,
-      salt: "salt",
     });
 
     return !user ? false : true;
@@ -28,13 +29,13 @@ exports.createUser = async (username, password) => {
   }
 };
 
-exports.isUserExists = async (username) => {
-  const user = await getUserFromUsername(username);
+exports.isUserExists = async (email) => {
+  const user = await getUserFromEmail(email);
   return !user ? false : true;
 };
 
-exports.checkUserAndValidatePassword = async (username, password) => {
-  const user = await getUserFromUsername(username);
+exports.checkUserAndValidatePassword = async (email, password) => {
+  const user = await getUserFromEmail(email);
 
   if (!user) {
     return {
