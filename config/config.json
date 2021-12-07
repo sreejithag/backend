@@ -1,25 +1,11 @@
 {
   "development": {
-<<<<<<< HEAD
-<<<<<<< HEAD
-    "username": "root",
-    "password": null,
-    "database": "database_development",
-    "host": "127.0.0.1",
-    "dialect": "mysql"
-=======
-=======
->>>>>>> f6ec4f1 (sequilize migrate added)
     "username": "admin",
     "password": "password",
     "database": "development",
     "host": "127.0.0.1",
     "port": "5432",
     "dialect": "postgres"
-<<<<<<< HEAD
->>>>>>> f6ec4f1 (sequilize migrate added)
-=======
->>>>>>> f6ec4f1 (sequilize migrate added)
   },
   "test": {
     "username": "root",
