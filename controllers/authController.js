@@ -32,10 +32,3 @@ exports.signup = async (request, h) => {
     success: false,
   };
 };
-
-exports.logout = async (request, h) => {
-  request.cookieAuth.clear();
-  return {
-    success: true,
-  };
-};
