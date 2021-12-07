@@ -19,5 +19,8 @@
     "joi": "^17.5.0",
     "pg": "^8.7.1",
     "sequelize": "^6.12.0-beta.1"
+  },
+  "devDependencies": {
+    "sequelize-cli": "^6.3.0"
   }
 }
