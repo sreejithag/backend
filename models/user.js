@@ -27,7 +27,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     {
       sequelize,
-      modelName: "User",
+      modelName: "Users",
       hooks: {
         beforeCreate: async (user) => {
           user.salt = await bcrypt.genSalt(10);

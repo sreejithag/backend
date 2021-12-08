@@ -7,7 +7,8 @@ const getCountryRoute = require("./routes/getCountryRoute");
 const getDataByCountryRoute = require("./routes/getDataByCountryRoute");
 const loginRoute = require("./routes/loginRoute");
 const signupRoute = require("./routes/signupRoute");
-const logoutRoute = require("./routes/LogoutRoute");
+const logoutRoute = require("./routes/logoutRoute");
+const updateUserRoute = require("./routes/updateUserRoute");
 
 module.exports.createServer = async (config) => {
   const server = Hapi.server(config);
@@ -23,5 +24,6 @@ module.exports.createServer = async (config) => {
   await loginRoute.register(server);
   await signupRoute.register(server);
   await logoutRoute.register(server);
+  await updateUserRoute.register(server);
   return server;
 };
