@@ -5,5 +5,10 @@ exports.register = async (server) => {
     method: "GET",
     path: "/getCountry",
     handler: getCountryController.getAllCountry,
+    options: {
+      auth: {
+        strategies: ["jwt", "session"],
+      },
+    },
   });
 };

@@ -4,5 +4,10 @@ exports.register = async (server) => {
     method: "GET",
     path: "/getDataByCompany/{company}",
     handler: getDataController.getDataByCompany,
+    options: {
+      auth: {
+        strategies: ["jwt", "session"],
+      },
+    },
   });
 };

@@ -5,5 +5,10 @@ exports.register = async (server) => {
     method: "PUT",
     path: "/updateUser",
     handler: authController.updateUser,
+    options: {
+      auth: {
+        strategies: ["jwt", "session"],
+      },
+    },
   });
 };

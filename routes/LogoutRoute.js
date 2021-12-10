@@ -5,5 +5,10 @@ exports.register = async (server) => {
     method: "GET",
     path: "/logout",
     handler: authController.logout,
+    options: {
+      auth: {
+        strategies: ["jwt", "session"],
+      },
+    },
   });
 };

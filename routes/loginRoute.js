@@ -11,4 +11,16 @@ exports.register = async (server) => {
       },
     },
   });
+
+  server.route({
+    method: "GET",
+    path: "/login/google",
+    options: {
+      auth: {
+        mode: "try",
+        strategy: "google",
+      },
+    },
+    handler: authController.googleLogin,
+  });
 };
