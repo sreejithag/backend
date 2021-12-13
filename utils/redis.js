@@ -1,6 +1,6 @@
 const redis = require("redis");
 const client = redis.createClient({
-  password: "password",
+  //password: "password",
 });
 client.connect();
 exports.setUser = async (email, firstName, lastName) => {

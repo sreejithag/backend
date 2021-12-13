@@ -9,6 +9,7 @@ const loginRoute = require("./routes/loginRoute");
 const signupRoute = require("./routes/signupRoute");
 const logoutRoute = require("./routes/logoutRoute");
 const updateUserRoute = require("./routes/updateUserRoute");
+const getSuggestionRoute = require("./routes/getSuggestionRoute");
 
 module.exports.createServer = async (config) => {
   const server = Hapi.server(config);
@@ -25,5 +26,6 @@ module.exports.createServer = async (config) => {
   await signupRoute.register(server);
   await logoutRoute.register(server);
   await updateUserRoute.register(server);
+  await getSuggestionRoute.register(server);
   return server;
 };

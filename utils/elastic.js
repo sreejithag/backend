@@ -148,3 +148,22 @@ exports.getAllCountry = async (index) => {
   const { hits } = response.body;
   return hits.hits.map((hit) => hit._source.name);
 };
+
+exports.getSuggestion = async (index, phrase) => {
+  const body = {
+    query: {
+      match_phrase_prefix: {
+        name: phrase,
+      },
+    },
+  };
+
+  const response = await client.search({
+    index: index,
+    size: 15,
+    _source: ["name"],
+    body: body,
+  });
+  const { hits } = response.body;
+  return hits.hits.map((hit) => hit._source.name);
+};
